@@ -10,5 +10,6 @@ else
 /etc/smokeping/config.d/Header'
     exit 1
 fi
-#grep -v '#' /etc/hosts|grep -vE '^$'|grep -v '::'|grep -v 'localhost'|awk '{print "++" $2 "\n title =" $2 "\n host =" $1 "\n"}'> /etc/smokeping/config.d/Targets
 egrep -v '#|^$|::|localhost' /etc/hosts |awk '{print "++" $2 "\n title = " $2 "\n host = " $1 "\n"}'>> /etc/smokeping/config.d/Targets
+# Avoid invalid smokeping syntax: remove dots from section names
+sed -i 's/\(++.*\)\.\(.*\)/\1\2/g' /etc/smokeping/config.d/Targets
