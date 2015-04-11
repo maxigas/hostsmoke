@@ -11,4 +11,4 @@ else
     exit 1
 fi
 #grep -v '#' /etc/hosts|grep -vE '^$'|grep -v '::'|grep -v 'localhost'|awk '{print "++" $2 "\n title =" $2 "\n host =" $1 "\n"}'> /etc/smokeping/config.d/Targets
-egrep -v '#|^$|::|localhost'|awk '{print "++" $2 "\n title =" $2 "\n host =" $1 "\n"}'>> /etc/smokeping/config.d/Targets
+egrep -v '#|^$|::|localhost' /etc/hosts |awk '{print "++" $2 "\n title = " $2 "\n host = " $1 "\n"}'>> /etc/smokeping/config.d/Targets
